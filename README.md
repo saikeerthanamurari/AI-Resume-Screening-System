@@ -32,7 +32,6 @@ It supports both single-resume analysis and multiple-resume analysis.
 - Downloadable CSV reports.
 - Machine Learning model comparison.
 - Hyperparameter tuning and evaluation.
-- Screenshots of application outputs.
 
 ## 4. Technologies Used
 
@@ -58,7 +57,6 @@ It supports both single-resume analysis and multiple-resume analysis.
 Resume_Screening_Python_Submission/
 │
 ├── app.py
-├── app_backup_before_ml.py
 ├── resume_parser.py
 ├── preprocessing.py
 ├── candidate_scoring.py
@@ -94,14 +92,10 @@ Resume_Screening_Python_Submission/
     ├── model_comparison.csv
     ├── test_predictions.csv
     ├── tuned_classification_report.txt
-    ├── tuned_ml_metrics.json
-    │
-    ├── screenshots/
-    │
-    └── candidate_reports/
-        ├── single_candidate_report.csv
-        └── multiple_candidate_report.csv
+    └── tuned_ml_metrics.json
 ```
+
+**Note:** Uploaded resumes, generated candidate reports, and private screenshots are excluded from the public GitHub repository.
 
 ## 6. Installation and Setup
 
@@ -227,7 +221,7 @@ The Flask application loads this tuned model for resume category prediction.
 
 ## 11. Output Files
 
-The `outputs/` directory stores the generated results.
+The `outputs/` directory contains the machine learning evaluation results.
 
 ### Machine Learning Outputs
 
@@ -242,8 +236,7 @@ The `outputs/` directory stores the generated results.
 
 ### Application Outputs
 
-- `screenshots/` – Application result screenshots.
-- `candidate_reports/` – Single and multiple candidate CSV reports.
+The application generates single-candidate and multiple-candidate analysis reports in CSV format. These reports are stored locally and excluded from the public GitHub repository to protect candidate information.
 
 ## 12. Limitations
 
