@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+
+# Uploaded resumes and generated candidate reports
+uploads/
+reports/
+
+# Private candidate data
+outputs/candidate_reports/
+outputs/old_screenshots/
+outputs/old_test_outputs/
+
+# Screenshots containing candidate information
+outputs/screenshots/

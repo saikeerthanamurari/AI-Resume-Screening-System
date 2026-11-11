@@ -1,0 +1,12 @@
+{
+    "selected_model": "Linear SVM - Word TF-IDF",
+    "cross_validation_macro_f1": 0.6259264046590723,
+    "accuracy": 0.6981891348088531,
+    "precision_macro": 0.6966671931305882,
+    "recall_macro": 0.657067932067932,
+    "f1_macro": 0.6541298473445042,
+    "f1_weighted": 0.6870702575016456,
+    "training_samples": 1984,
+    "testing_samples": 497,
+    "categories": 24
+}

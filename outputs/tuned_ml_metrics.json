@@ -1,0 +1,14 @@
+{
+    "selected_model": "Tuned Linear SVM",
+    "best_parameters": {
+        "classifier__C": "10",
+        "classifier__class_weight": "balanced",
+        "features": "TfidfVectorizer(max_features=30000, min_df=2, ngram_range=(1, 2),\n                stop_words='english', sublinear_tf=True)"
+    },
+    "cross_validation_accuracy": 0.6880149098033229,
+    "test_accuracy": 0.7022132796780685,
+    "precision_macro": 0.6993559189657182,
+    "recall_macro": 0.6600937257187257,
+    "f1_macro": 0.6601529025356002,
+    "f1_weighted": 0.6939685194460703
+}

@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Resume Screening System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <header>
+        <h1>AI Resume Screening System</h1>
+        <p>Intelligent Resume Analysis and Candidate Matching</p>
+    </header>
+
+    <main class="container">
+
+        <section class="card">
+            <h2>Job Description</h2>
+
+            <form action="/analyze" method="POST"
+                  enctype="multipart/form-data">
+
+                <label for="job_description">
+                    Enter Job Description:
+                </label>
+
+                <textarea
+                    id="job_description"
+                    name="job_description"
+                    placeholder="Enter the job requirements, skills and qualifications..."
+                    required></textarea>
+
+                <h2>Select Upload Mode</h2>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="upload_mode"
+                        value="single"
+                        checked>
+                    Single Resume Upload
+                </label>
+
+                <label>
+                    <input
+                        type="radio"
+                        name="upload_mode"
+                        value="multiple">
+                    Multiple Resume Upload
+                </label>
+
+                <h2>Upload Resumes</h2>
+
+                <label for="resumes">
+                    Select Resume (PDF, DOCX or TXT):
+                </label>
+
+                <input
+                    type="file"
+                    id="resumes"
+                    name="resumes"
+                    accept=".pdf,.docx,.txt"
+                    required>
+
+                <button type="submit">
+                    Analyze Resume(s)
+                </button>
+
+            </form>
+        </section>
+
+        <section class="card information">
+            <h2>System Features</h2>
+
+            <ul>
+                <li>Resume text extraction</li>
+                <li>Automatic skill identification</li>
+                <li>Candidate qualification analysis</li>
+                <li>Job description matching</li>
+                <li>Candidate suitability scoring</li>
+                <li>Individual and combined reports</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>How It Works</h2>
+
+            <p>1. Enter the job description.</p>
+            <p>2. Select single or multiple resume upload.</p>
+            <p>3. Upload the resume file(s).</p>
+            <p>4. The system extracts and processes resume information.</p>
+            <p>5. NLP techniques compare resumes with job requirements.</p>
+            <p>6. View the analysis and download the report.</p>
+
+        </section>
+
+        <p class="note">
+            Note: Results are intended as decision-support information.
+            Human review is necessary before making recruitment decisions.
+        </p>
+
+    </main>
+
+    <footer>
+        <p>AI-Based Resume Screening &amp; Candidate Analysis System</p>
+        <p>Developed using Python, Flask and Machine Learning</p>
+    </footer>
+
+    <script>
+        const uploadOptions = document.querySelectorAll(
+            'input[name="upload_mode"]'
+        );
+
+        const resumeInput = document.getElementById("resumes");
+
+        uploadOptions.forEach(option => {
+            option.addEventListener("change", function () {
+                resumeInput.multiple = this.value === "multiple";
+
+                resumeInput.value = "";
+            });
+        });
+    </script>
+
+</body>
+</html>

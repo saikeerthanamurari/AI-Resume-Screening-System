@@ -1,0 +1,9 @@
+Candidate Name: Alex Kumar
+
+Education: Bachelor of Computer Science
+
+Skills: Python, SQL, HTML, CSS, JavaScript, Flask, Machine Learning, Data Analysis, Pandas, NumPy, Scikit-learn, React
+
+Experience: Completed academic projects involving Python application development, data preprocessing, and machine learning.
+
+Projects: Developed a student performance analysis application using Python and Pandas.

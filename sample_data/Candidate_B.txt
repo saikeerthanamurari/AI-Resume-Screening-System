@@ -1,0 +1,9 @@
+Candidate Name: Sam Thomas
+
+Education: Bachelor of Computer Science
+
+Skills: Java, C, HTML, CSS, Communication, Teamwork
+
+Experience: Completed academic programming assignments and basic web development projects.
+
+Projects: Developed a simple static personal portfolio website.

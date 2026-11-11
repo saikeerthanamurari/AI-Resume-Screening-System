@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Candidate Analysis Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>AI Resume Screening Dashboard</h1>
+    <p>Intelligent Resume Analysis & Candidate Evaluation</p>
+</header>
+
+<main class="container">
+
+    <!-- Job Requirements -->
+    <section class="card">
+
+        <h2>Job Requirements</h2>
+
+        <p class="section-description">
+            Skills extracted from the submitted job description.
+        </p>
+
+        {% if required_skills %}
+            <div class="skill-list">
+                {% for skill in required_skills %}
+                    <span class="skill-tag">{{ skill }}</span>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No predefined skills were identified.</p>
+        {% endif %}
+
+    </section>
+
+
+    <!-- Candidate Results -->
+    <section class="card">
+
+        {% if upload_mode == "single" %}
+            <h2>Individual Candidate Analysis</h2>
+        {% else %}
+            <h2>Candidate Ranking</h2>
+        {% endif %}
+
+        <p class="section-description">
+            Detailed evaluation based on extracted skills and text similarity.
+        </p>
+
+
+        {% for candidate in results %}
+
+            <div class="candidate-card">
+
+                <!-- Candidate Heading -->
+                <div class="candidate-heading">
+
+                    <div>
+                        {% if upload_mode == "multiple" %}
+                            <h3>{{ loop.index }}. {{ candidate.filename }}</h3>
+                        {% else %}
+                            <h3>{{ candidate.filename }}</h3>
+                        {% endif %}
+
+                        <p class="candidate-summary">
+                            {{ candidate.summary }}
+                        </p>
+
+                        <p class="candidate-summary">
+                            <strong>AI Predicted Resume Category:</strong>
+                            {{ candidate.predicted_category }}
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Score Cards -->
+                <div class="score-grid">
+
+                    <div class="metric-card">
+                        <span>Skill Match</span>
+                        <strong>{{ candidate.skill_score }}%</strong>
+                    </div>
+
+                    <div class="metric-card">
+                        <span>TF-IDF Similarity</span>
+                        <strong>{{ candidate.similarity_score }}%</strong>
+                    </div>
+
+                    <div class="metric-card">
+                        <span>Matched Skills</span>
+                        <strong>{{ candidate.total_matched_skills }}</strong>
+                    </div>
+
+                    <div class="metric-card">
+                        <span>Missing Skills</span>
+                        <strong>{{ candidate.total_missing_skills }}</strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Skill Match Progress -->
+                <div class="progress-section">
+
+                    <div class="progress-heading">
+                        <strong>Skill Matching Progress</strong>
+                        <span>{{ candidate.skill_score }}%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill"
+                             style="width: {{ candidate.skill_score }}%;">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Similarity Progress -->
+                <div class="progress-section">
+
+                    <div class="progress-heading">
+                        <strong>Text Similarity Progress</strong>
+                        <span>{{ candidate.similarity_score }}%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="similarity-fill"
+                             style="width: {{ candidate.similarity_score }}%;">
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- Matched Skills -->
+                <div class="skill-section">
+
+                    <h4>Matched Skills</h4>
+
+                    {% if candidate.matched_skills %}
+                        <div class="skill-list">
+                            {% for skill in candidate.matched_skills %}
+                                <span class="matched-tag">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>None</p>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Missing Skills -->
+                <div class="skill-section">
+
+                    <h4>Missing Required Skills</h4>
+
+                    {% if candidate.missing_skills %}
+                        <div class="skill-list">
+                            {% for skill in candidate.missing_skills %}
+                                <span class="missing-tag">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>None</p>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Extra Skills -->
+                <div class="skill-section">
+
+                    <h4>Additional Skills Identified</h4>
+
+                    {% if candidate.extra_skills %}
+                        <div class="skill-list">
+                            {% for skill in candidate.extra_skills %}
+                                <span class="extra-tag">{{ skill }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <p>No additional skills identified.</p>
+                    {% endif %}
+
+                </div>
+
+
+                <!-- Identified Skills -->
+                <div class="skill-section">
+
+                    <h4>All Identified Skills</h4>
+
+                    <div class="skill-list">
+                        {% for skill in candidate.skills %}
+                            <span class="skill-tag">{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- Important Note -->
+    <section class="card important-note">
+
+        <h2>Important Information</h2>
+
+        <p>
+            The system uses a trained Linear SVM machine learning
+            classifier to predict resume categories, along with
+            keyword-based skill extraction, predefined skill matching
+            and TF-IDF text similarity. Category predictions and
+            matching scores are automated estimates and do not measure
+            a candidate's complete ability or qualifications.
+            Human review is required before making recruitment decisions.
+        </p>
+
+    </section>
+
+
+    <!-- Download Reports -->
+    <section class="action-section">
+
+        <a href="{{ url_for('download_report', filename=report_filename) }}"
+           class="back-link">
+
+            {% if upload_mode == "single" %}
+                Download Individual Candidate Report (CSV)
+            {% else %}
+                Download Combined Candidate Report (CSV)
+            {% endif %}
+
+        </a>
+
+        <a href="/" class="secondary-link">
+            Analyze More Resumes
+        </a>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>AI-Based Resume Screening &amp; Candidate Analysis System</p>
+    <p>Machine Learning | Natural Language Processing | Data Analytics</p>
+</footer>
+
+</body>
+</html>
